@@ -29,7 +29,7 @@ FAILURE=$(grep -E -o "Failures.{0,3}" stdout)
 if [[ $CHECK ]]
     then
         echo "Total: 4 tests"
-        echo "$FAILURE"
+        grep "Failures" stdout
     else
         echo "Total: 4 tests"
         echo "You pass: $PASS"
