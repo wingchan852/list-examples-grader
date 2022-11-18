@@ -20,31 +20,34 @@ public class TestListExamples {
   // Write your grading tests here!
   @Test
   public void testFilter() {
-    List<String> input = Arrays.asList("apple", "banana");
-    List<String> output = Arrays.asList("apple");
+    List<String> input = Arrays.asList("apple", "or");
+    List<String> output = Arrays.asList("apple", "or");
     SomeStringChecker stringChecker = new SomeStringChecker();
-    assertEquals(output, ListExamples.filter(input, stringChecker));
+    assertEquals(output, ListExamples.filter(input,
+        stringChecker));
   }
 
   @Test
   public void testFilter2() {
-    List<String> input = Arrays.asList("banana");
-    List<String> output = Arrays.asList("");
+    List<String> input = Arrays.asList();
+    List<String> output = Arrays.asList();
     SomeStringChecker stringChecker = new SomeStringChecker();
-    assertEquals(output, ListExamples.filter(input, stringChecker));
+    assertEquals(output,
+        ListExamples.filter(input, stringChecker));
   }
 
   @Test
   public void testFilter3() {
-    List<String> input = Arrays.asList("apple", "apple", "banana");
-    List<String> output = Arrays.asList("apple", "apple");
+    List<String> input = Arrays.asList("banana");
+    List<String> output = Arrays.asList();
     SomeStringChecker stringChecker = new SomeStringChecker();
-    assertEquals(output, ListExamples.filter(input, stringChecker));
+    assertEquals(output, ListExamples.filter(input,
+        stringChecker));
   }
 
   @Test
   public void testMerge3() {
-    List<String> list1 = Arrays.asList("apple", "cat", "banana");
+    List<String> list1 = Arrays.asList("apple", "banana", "cat");
     List<String> list2 = Arrays.asList("banana");
     List<String> output = Arrays.asList("apple", "banana", "banana", "cat");
     assertEquals(output, ListExamples.merge(list1, list2));

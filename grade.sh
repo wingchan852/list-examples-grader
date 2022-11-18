@@ -19,12 +19,26 @@ set +e
 # compile the test & student code
 cd student-submission
 javac -cp $CPATH *.java
-java -cp $CPATH org.junit.runner.JUnitCore TestListExamples 1 > stdout 2 > stderr
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples 1> stdout 
 
+CHECK=$(grep -o "Failures" stdout)
+PASS=$(grep -E -o ".{0,2}test.{0,0}" stdout)
+FAILURE=$(grep -E -o "Failures.{0,3}" stdout)
+
+# check how many passed tests
+if [[ $CHECK ]]
+    then
+        echo "Total: 4 tests"
+        echo "$FAILURE"
+    else
+        echo "Total: 4 tests"
+        echo "You pass: $PASS"
+fi 
 
 if [[ $? -eq 0 ]]
 then 
-    echo "all tests passed!"
+    exit
 else    
     echo "test filed!"
 fi
+
