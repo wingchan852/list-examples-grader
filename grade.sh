@@ -1,9 +1,10 @@
 # Create your grading script here
 set -e
 CPATH=".:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar"
-rm -rf student-submission
+rm -rf student-submission > line4_out 2> line4_err
+# echo $?
 git clone $1 student-submission
-
+echo $?
 # check file exist
 if [[ -f "./student-submission/ListExamples.java" ]]
 then 
@@ -13,13 +14,13 @@ else
 fi
 
 # copy the test & lib to student-submission
-cp TestListExamples.java ./student-submission/
-cp -r lib ./student-submission/
+cp TestListExamples.java ./student-submission/ > line17_out 2> line17_err
+cp -r lib ./student-submission/ > line18_out 2> line18_err
 set +e
 # compile the test & student code
-cd student-submission
-javac -cp $CPATH *.java
-java -cp $CPATH org.junit.runner.JUnitCore TestListExamples 1> stdout 
+cd student-submission > line21_out 2> line21_err
+javac -cp $CPATH *.java > line22_out 2> line22_err
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples 1> stdout 2>stderr
 
 CHECK=$(grep -o "Failures" stdout)
 PASS=$(grep -E -o ".{0,2}test.{0,0}" stdout)
@@ -34,7 +35,7 @@ if [[ $CHECK ]]
         echo "Total: 4 tests"
         echo "You pass: $PASS"
 fi 
-
+echo $?
 if [[ $? -eq 0 ]]
 then 
     exit
